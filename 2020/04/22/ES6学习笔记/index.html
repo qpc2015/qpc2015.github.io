@@ -7,19 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>栈 - 博客</title>
+<title>ES6学习笔记 - 博客</title>
 
 
-    <meta name="keywords" content="栈">
+    <meta name="description" content="ES6:ECMAScript是JavaScript的标准，JS是ES的实现，主流实现只有JS，所以很多时候JS就等同于ECMA正式名称：ES2015，是ECMA标准的第六版 变量: var存在的问题: 12345678910111、重复声明：    var a=12;    var a=5；2、控制修改：    var GIT_HOST=&apos;github.com&apos;    if(GIT_HOST=&apos;g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="栈">
-<meta property="og:url" content="https://qpc2015.github.io/2019/09/11/栈/index.html">
+<meta property="og:title" content="ES6学习笔记">
+<meta property="og:url" content="https://qpc2015.github.io/2020/04/22/ES6学习笔记/index.html">
 <meta property="og:site_name" content="博客">
+<meta property="og:description" content="ES6:ECMAScript是JavaScript的标准，JS是ES的实现，主流实现只有JS，所以很多时候JS就等同于ECMA正式名称：ES2015，是ECMA标准的第六版 变量: var存在的问题: 12345678910111、重复声明：    var a=12;    var a=5；2、控制修改：    var GIT_HOST=&apos;github.com&apos;    if(GIT_HOST=&apos;g">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://qpc2015.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-11T08:31:21.186Z">
+<meta property="og:updated_time" content="2020-04-22T01:35:40.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="栈">
+<meta name="twitter:title" content="ES6学习笔记">
+<meta name="twitter:description" content="ES6:ECMAScript是JavaScript的标准，JS是ES的实现，主流实现只有JS，所以很多时候JS就等同于ECMA正式名称：ES2015，是ECMA标准的第六版 变量: var存在的问题: 12345678910111、重复声明：    var a=12;    var a=5；2、控制修改：    var GIT_HOST=&apos;github.com&apos;    if(GIT_HOST=&apos;g">
 <meta name="twitter:image" content="https://qpc2015.github.io/images/og_image.png">
 
 
@@ -100,7 +102,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="栈" height="28">
+                <img src="/images/logo.svg" alt="ES6学习笔记" height="28">
             
             </a>
         </div>
@@ -147,17 +149,13 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-11T08:30:47.000Z">2019-09-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据结构/">数据结构</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2020-04-22T01:35:07.000Z">2020-04-22</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 7 个字)
+                    5 分钟 读完 (大约 781 个字)
                 </span>
                 
                 
@@ -166,21 +164,93 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                栈
+                ES6学习笔记
             
         </h1>
         <div class="content">
-            <p><img src="http://pxebjkhug.bkt.clouddn.com/%E6%A0%88.png" alt></p>
+            <p>ES6:ECMAScript是JavaScript的标准，JS是ES的实现，主流实现只有JS，所以很多时候JS就等同于ECMA<br>正式名称：ES2015，是ECMA标准的第六版</p>
+<p>变量:</p>
+<p>var存在的问题:</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">1</span>、重复声明：</span><br><span class="line">    <span class="hljs-keyword">var</span> a=<span class="hljs-number">12</span>;</span><br><span class="line">    <span class="hljs-keyword">var</span> a=<span class="hljs-number">5</span>；</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">2</span>、控制修改：</span><br><span class="line">    <span class="hljs-keyword">var</span> GIT_HOST=<span class="hljs-string">'github.com'</span></span><br><span class="line">    <span class="hljs-keyword">if</span>(GIT_HOST=<span class="hljs-string">'git'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">3</span>、块级作用域：</span><br><span class="line">    ES5的<span class="hljs-keyword">var</span>作用域——函数级</span><br><span class="line">    ES6的<span class="hljs-keyword">let</span>作用域——块级</span><br></pre></td></tr></table></figure>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/栈/">栈</a>
-                </div>
-            </div>
+<p>let:变量,防止重复定义<br>const:常量,防止重复定义</p>
+<pre><code>小总结：
+变量：
+    var:重复声明，不能限制修改，函数级
+    let:不能重复声明，变量,块级
+    const:不能重复声明,常量，块级</code></pre><hr>
+<p>解构赋值:</p>
+<p>json = {a:12,b:5};</p>
+<p>let (a,b)=json;</p>
+<p>arr = [1,2,3];</p>
+<p>let [a,b,c]= arr;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、两边结构必须一样</span><br><span class="line">  let &#123;a,b&#125;=[1,2]</span><br><span class="line">2、右边必须是个东西</span><br><span class="line">  let &#123;a,b&#125;=&#123;1,2&#125;</span><br><span class="line">3、赋值与解构同时完成</span><br><span class="line">  let &#123;a,b&#125;;</span><br><span class="line">  &#123;a,b&#125;=&#123;a:1,b:2&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>箭头函数:</p>
+<pre><code>function(){
+    .....
+}
+()=&gt;{}</code></pre><p>简写：<br>    1、如果有且仅有一个参数，（）可不写<br>    2、如果有且仅有一个语句并且是return，{}也可以不写</p>
+<p>修正this</p>
+<hr>
+<p>…</p>
+<p>参数展开<br>    收集<br>    展开</p>
+<p>数组展开<br>json展开</p>
+<hr>
+<p>Array扩展:</p>
+<p>map         映射，一一对应（n=&gt;n）<br>reduce      n=&gt;1<br>filter      过滤（n=&gt;?）<br>forEach     遍历</p>
+<hr>
+<p>模板字符串:</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> arr=[<span class="hljs-number">12</span>,<span class="hljs-number">56</span>,<span class="hljs-number">87</span>,<span class="hljs-number">95</span>,<span class="hljs-number">64</span>];</span><br><span class="line">    arr.forEach(<span class="hljs-function">(<span class="hljs-params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">        alert(<span class="hljs-string">`第<span class="hljs-subst">$&#123;index&#125;</span>个：<span class="hljs-subst">$&#123;item&#125;</span>`</span>);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>JSON:</p>
+<p>stringify:JSON-&gt;字符串<br>Parse:json字符串-&gt;JSON</p>
+<hr>
+<p>babel编译</p>
+<p>本地使用:</p>
+<pre><code>1、安装node
+2、安装babel
+    npm i @babel/core @babel/cli @babel/preset-env
+    npm i @babel/polyfill
+3、添加脚本
+    &quot;build&quot;:&quot;babel src -d dest&quot;
+4、添加配置
+    {
+        &quot;presets&quot;:{
+            &quot;@babel/preset-env&quot;
+        }
+    }
+5、执行
+    npm run build</code></pre><hr>
+<p>异步操作:</p>
+<p>异步操作：同时进行多个操作，用户体验，es6之前代码混乱<br>同步操作：一次只能进行一个操作，用户体验不好，代码清晰</p>
+<p>异步的同步写法:</p>
+<pre><code>Promise
+    1、封装
+    2、promise.all{[
+            p1,
+            p2,
+            ...
+        ]}.then
+    3、promise.race
+
+async/await
+    普通函数——一直执行，直到结束
+    async函数——能够&quot;暂停&quot;</code></pre><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:<span class="hljs-string">'data/1.txt'</span>,</span><br><span class="line">        dataType:<span class="hljs-string">'json'</span>,</span><br><span class="line">        success(arr)&#123;</span><br><span class="line">            resolve(arr);</span><br><span class="line">        &#125;,</span><br><span class="line">        error(res)&#123;</span><br><span class="line">            reject(res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line">p.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arr</span>)</span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">"成功"</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(arr);</span><br><span class="line">&#125;,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>)</span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">"失败"</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>面向对象</p>
+<p>语言发展：<br>    机器语言-&gt;汇编语言-&gt;低级语言（面向过程）-&gt;高级语言（面向对象）-&gt;模块系统-&gt;框架-&gt;系统接口（API）</p>
+<p>封装<br>    ES5面向对象（假的）<br>        没有统一的写法<br>    ES6面向对象（假的）<br>        统一的写法<br>继承：<br>    1、省事<br>    2、便于扩展</p>
+<p>ES6新加：<br>    class           类声明<br>    constructor     构造函数<br>    extends         继承<br>    super           父类/超类</p>
+<hr>
+<p>模块系统</p>
+<p>1、定义</p>
+<p>2、使用<br>    1、导出（export）<br>        //变量<br>        export let a=1;<br>        //函数<br>        export function show(){<br>            ……<br>        }<br>        //类<br>        export calss Person{<br>            …….<br>        }<br>        //默认成员<br>        export default</p>
+<p>​    2、导入<br>​        import * as model from xxx          引入所有成员<br>​        import model from xxx               引入default成员<br>​        import {a,b as name} from xxx<br>​        //只引入，不使用<br>​        import ‘xxx’<br>​        //异步引入<br>​        let p=import(xxxx)<br>​    3、webpack编译 (因暂时浏览器不支持模块化,所以是有wp编译)</p>
+
         </div>
         
         
@@ -234,17 +304,10 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/11/队列/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">队列</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/11/线性表/">
-                <span class="level-item">线性表</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/16/树/">
+                <span class="level-item">树</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -871,7 +934,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="栈" height="28">
+                    <img src="/images/logo.svg" alt="ES6学习笔记" height="28">
                 
                 </a>
                 <p class="is-size-7">

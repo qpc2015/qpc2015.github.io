@@ -375,6 +375,109 @@ async/await
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-09T03:04:37.395Z">2020-04-09</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 754 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/09/app逆向笔记/"></a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="逆向环境搭建"><a href="#逆向环境搭建" class="headerlink" title="逆向环境搭建"></a>逆向环境搭建</h2><h4 id="iPhone越狱操作"><a href="#iPhone越狱操作" class="headerlink" title="iPhone越狱操作"></a>iPhone越狱操作</h4><p><del>pp助手</del></p>
+<p><del>爱思助手</del>(一键越狱未成功)</p>
+<p><strong>刚开始使用unc0ver对几款iphone进行越狱安装后均显示不支持,所以改用checkra1n</strong></p>
+<p><strong>先将官网放上<a href="https://checkra.in/" target="_blank" rel="noopener">https://checkra.in/</a></strong></p>
+<p><strong>刚开始用的官网下载的0.9.8.2刷机均中途报错</strong></p>
+<p><code>Exploit Failed (Error code: -31) 或 Timed out waiting for bootstrap upload(Likely caused by an incompatible tweak, to enable Safe Mode check the option on main screen) (Error code: -20)</code></p>
+<p><strong>后搜到这篇文章,看到有0.10.0版本的过段换最新的试试.</strong></p>
+<p><a href="https://mrmad.com.tw/checkra1n" target="_blank" rel="noopener">https://mrmad.com.tw/checkra1n</a></p>
+<p><strong>最后贴上越狱成功下载地址</strong></p>
+<p>[v0.10.0 Beta](<a href="https://assets.checkra.in/test/checkra1n" target="_blank" rel="noopener">https://assets.checkra.in/test/checkra1n</a> beta 0.10.0.dmg)</p>
+<h4 id="mac远程登录iPhone"><a href="#mac远程登录iPhone" class="headerlink" title="mac远程登录iPhone"></a>mac远程登录iPhone</h4><p>通过ssh让mac远程登录iphone</p>
+<p>1.手机端安装Cydia安装openssh工具</p>
+<p>2.使用查看插件descrition中的描述</p>
+<p>3.确保mac和iphone在同一局域网下,在mac的终端输入ssh 账户名@服务器主机地址 例如ssh <a href="mailto:root@10.1.1.168" target="_blank" rel="noopener">root@10.1.1.168</a> (初始密码一般为alpine)</p>
+<p>4.退出连接 exit</p>
+<p><strong>相关拓展:</strong></p>
+<p><strong>iOS下有2个常用账户:root/mobile</strong></p>
+<p>root:最高权限账户,$HOME是/var/root</p>
+<p>mobile:普通权限账户,只能操作一些普通文件,不能操作系统级别的文件,$HOME是/var/mobile</p>
+<p><strong>修改登录密码</strong></p>
+<p>passwd  修改root密码</p>
+<p>Passwd mobile 修改mobile用户密码</p>
+<p><a href="https://www.jianshu.com/p/816c628a9722" target="_blank" rel="noopener">参考文章链接</a></p>
+<h4 id="Cycript"><a href="#Cycript" class="headerlink" title="Cycript"></a>Cycript</h4><p>通过cydia安装cycript可在iphone上调试运行中的app</p>
+<p>常用指令</p>
+<p>开启</p>
+<p>cycript </p>
+<p>cycript -p 进程ID</p>
+<p>cycript -p 进程名称</p>
+<p>取消输入: Ctrl + C</p>
+<p>退出: Ctrl + D</p>
+<p>清屏:Command + R</p>
+<p><strong>常用语法</strong></p>
+<p>UIApp  获取app对象</p>
+<p>#内存地址  用内存地址获取对象</p>
+<p>ObjectiveC.classes 已加载的所有OC类</p>
+<p>*对象 查看对象的所有成员变量</p>
+<p>view.recursiveDescription().toString() 递归打印view的所有子控件</p>
+<p>choose(UITableViewCell) 筛选出某种类型的对象</p>
+<p><a href="https://github.com/CoderMJLee/mjcript" target="_blank" rel="noopener">mj工具类</a></p>
+<h4 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h4><p>手机安装adv-cmds插件</p>
+<p><img src="/Users/pengchengqin/Desktop/blog/source/_posts/image-20200429144756710.png" alt="image-20200429144756710"></p>
+<p>使用ps命令可以列出系统当前的进程</p>
+<p>列出所有的进程</p>
+<p>ps -A</p>
+<p>ps aux</p>
+<p>搜索关键词</p>
+<p>ps -A|grep 关键词</p>
+<h4 id="Reveal界面调试工具"><a href="#Reveal界面调试工具" class="headerlink" title="Reveal界面调试工具"></a>Reveal界面调试工具</h4><p>可以用其找到对应要操作视图类</p>
+<h4 id="Mach-O"><a href="#Mach-O" class="headerlink" title="Mach-O"></a>Mach-O</h4><p><img src="/Users/pengchengqin/Desktop/blog/source/_posts/image-20200429154354763.png" alt="image-20200429154354763"></p>
+<p>Class-dump对Mach-o文件进行静态分析,导出对应的头文件</p>
+<p>导出指令</p>
+<p>Class-dump -H Mach-O 文件路径 -o 头文件存放目录</p>
+<p>-H表示要生成头文件</p>
+<p>-o用于制定头文件的存放目录</p>
+<p>头文件导出,可导出oc,swift过滤</p>
+<p><a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">http://stevenygard.com/projects/class-dump/</a></p>
+<p><a href="https://www.jianshu.com/p/d9a561f7c54d" target="_blank" rel="noopener">参考</a></p>
+<h4 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h4><p>加壳是通过特殊算法,对可执行文件的编码进行改变(比如压缩/加密),以达到保护程序代码的目的.</p>
+<p><img src="/Users/pengchengqin/Desktop/blog/source/_posts/image-20200429154833545.png" alt="image-20200429154833545"></p>
+<p>脱壳就是将未加密的文件还原出来.</p>
+<p>手机安装crackerXI插件,获取脱壳后文件,使用ifunbox将其导出.</p>
+<p><a href="https://www.jianshu.com/p/645ef237e0d2" target="_blank" rel="noopener">实战课参考此文章</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-09-16T09:17:39.000Z">2019-09-16</time>
                 
                 <div class="level-item">
@@ -706,7 +809,7 @@ async/await
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        8
+                        9
                     </p>
                 </div>
             </div>
@@ -899,6 +1002,25 @@ async/await
         
         <article class="media">
             
+            <a href="/2020/04/09/app逆向笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T03:04:37.395Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/app逆向笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/09/16/树/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="树">
@@ -935,25 +1057,6 @@ async/await
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/11/栈/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="栈">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-11T08:30:47.000Z">2019-09-11</time></div>
-                    <a href="/2019/09/11/栈/" class="title has-link-black-ter is-size-6 has-text-weight-normal">栈</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据结构/">数据结构</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -972,7 +1075,7 @@ async/await
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1113,6 +1216,25 @@ async/await
         
         <article class="media">
             
+            <a href="/2020/04/09/app逆向笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T03:04:37.395Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/app逆向笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/09/16/树/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="树">
@@ -1149,25 +1271,6 @@ async/await
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/11/栈/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="栈">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-11T08:30:47.000Z">2019-09-11</time></div>
-                    <a href="/2019/09/11/栈/" class="title has-link-black-ter is-size-6 has-text-weight-normal">栈</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据结构/">数据结构</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1186,7 +1289,7 @@ async/await
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>

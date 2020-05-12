@@ -8,6 +8,8 @@
 
 **刚开始使用unc0ver对几款iphone进行越狱安装后均显示不支持,所以改用checkra1n**
 
+<!-- more -->
+
 **先将官网放上https://checkra.in/**
 
 **刚开始用的官网下载的0.9.8.2刷机均中途报错**
@@ -21,8 +23,6 @@ https://mrmad.com.tw/checkra1n
 **最后贴上越狱成功下载地址**
 
 [v0.10.0 Beta](https://assets.checkra.in/test/checkra1n beta 0.10.0.dmg)
-
-
 
 #### mac远程登录iPhone
 

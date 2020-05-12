@@ -7,11 +7,7 @@ categories:
 date: 2020-04-22 09:40:17
 ---
 
-
-
 尺寸单位rpx,规定屏幕宽为750rpx
-
-
 
 ### flex布局
 
@@ -21,6 +17,8 @@ flex布局是小程序经常使用布局方式
 
 开启flex布局的元素叫flex container,其中直系子元素叫做flex items
 
+<!-- more -->
+
 #### 属性
 
 **flex-derection决定了main axis的方向**
@@ -28,8 +26,6 @@ flex布局是小程序经常使用布局方式
 属性值: row | row-reverse | column | column-reverse
 
 ![image-20200422094943732](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200422094943732.png)
-
-
 
 **justify-content决定了flex items在main axis上的对其方式**
 

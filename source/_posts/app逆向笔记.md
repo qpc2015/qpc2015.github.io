@@ -1,3 +1,12 @@
+---
+title: app逆向笔记
+tags:
+  - null
+categories:
+  - null
+date: 2020-04-09 16:30:17
+---
+
 ## 逆向环境搭建
 
 #### iPhone越狱操作
@@ -100,7 +109,7 @@ choose(UITableViewCell) 筛选出某种类型的对象
 
 手机安装adv-cmds插件
 
-![image-20200429144756710](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200429144756710.png)
+![image-20200429144756710](app逆向笔记/image-20200429144756710.png)
 
 使用ps命令可以列出系统当前的进程
 
@@ -124,7 +133,7 @@ ps -A|grep 关键词
 
 #### Mach-O
 
-![image-20200429154354763](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200429154354763.png)
+![image-20200429154354763](app逆向笔记/image-20200429154354763.png)
 
 Class-dump对Mach-o文件进行静态分析,导出对应的头文件
 
@@ -152,7 +161,7 @@ http://stevenygard.com/projects/class-dump/
 
 加壳是通过特殊算法,对可执行文件的编码进行改变(比如压缩/加密),以达到保护程序代码的目的.
 
-![image-20200429154833545](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200429154833545.png)
+![image-20200429154833545](app逆向笔记/image-20200429154833545.png)
 
 脱壳就是将未加密的文件还原出来.
 

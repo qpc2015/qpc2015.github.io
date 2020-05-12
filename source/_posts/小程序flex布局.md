@@ -25,7 +25,7 @@ flex布局是小程序经常使用布局方式
 
 属性值: row | row-reverse | column | column-reverse
 
-![image-20200422094943732](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200422094943732.png)
+![](小程序flex布局/image-20200422094943732.png)
 
 **justify-content决定了flex items在main axis上的对其方式**
 
@@ -41,7 +41,7 @@ Space-evenly:items之间的距离相等,items与main-start,main-end之间的距�
 
 Space-around:items之间的距离相等,与main-start,main-end之间的距离等于items之间的距离的一半
 
-![image-20200422095548288](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200422095548288.png)
+![image-20200422095548288](小程序flex布局/image-20200422095548288.png)
 
 
 
@@ -57,7 +57,7 @@ center: 居中对齐
 
 Baseline:与基准下对齐
 
-![image-20200422095947123](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200422095947123.png)
+![image-20200422095947123](小程序flex布局/image-20200422095947123.png)
 
 
 
@@ -97,9 +97,7 @@ Space-around:items之间的距离相等,与cross-start,cross-end之间的距离�
 
 Space-evenly:items之间的距离相等,items与cross-start,cross-end之间的距离等于items之间的距离.
 
-
-
-![image-20200422100724287](/Users/pengchengqin/Desktop/blog/source/_posts/image-20200422100724287.png)
+![image-20200422100724287](小程序flex布局/image-20200422100724287.png)
 
 
 

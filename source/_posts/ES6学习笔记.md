@@ -1,9 +1,9 @@
 ---
 title: ES6学习笔记
 tags:
-  - null
+  - ES6
 categories:
-  - null
+  - web
 date: 2020-04-22 09:35:07
 ---
 

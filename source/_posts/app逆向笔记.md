@@ -1,9 +1,9 @@
 ---
-title: app逆向笔记
+title: iOS逆向笔记
 tags:
-  - null
+  - iOS逆向
 categories:
-  - null
+  - iOS
 date: 2020-04-09 16:30:17
 ---
 
@@ -169,4 +169,11 @@ http://stevenygard.com/projects/class-dump/
 
 
 
+#### TWeak实战
+
 [实战课参考此文章](https://www.jianshu.com/p/645ef237e0d2)
+
+
+
+
+

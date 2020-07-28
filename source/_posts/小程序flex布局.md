@@ -3,7 +3,7 @@ title: 小程序flex布局
 tags:
   - 小程序
 categories:
-  - 前端
+  - web
 date: 2020-04-22 09:40:17
 ---
 

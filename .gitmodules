@@ -1,3 +1,4 @@
+
 [submodule "themes/hexo-theme-icarus"]
-	path = themes/hexo-theme-icarus
+	path = themes/icarus
 	url = git@github.com:qpc2015/hexo-theme-icarus.git

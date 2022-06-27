@@ -108,3 +108,5 @@ hexo d -g #生成并上传
 
 
 5.[Hexo博客多端同步解决办法](https://segmentfault.com/a/1190000019459014?utm_source=tag-newest)
+
+6.[自定义域名绑定篇](https://juejin.cn/post/6998140713334472740)

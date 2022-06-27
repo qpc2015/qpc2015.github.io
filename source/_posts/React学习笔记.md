@@ -19,8 +19,6 @@ Redux:比flux更加简单、易用
 
 React-Native:用react编写原生移动应用
 
-React-server:服务端渲染react组件
-
 <!-- more -->
 
 **jsx**

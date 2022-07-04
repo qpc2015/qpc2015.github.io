@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>iOS 预编译指令#if - 覃鹏成的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="覃鹏成的博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="覃鹏成的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="OC中的预编译指令有三种功能1：宏定义  2条件编译  3文件包含 1、宏定义 1-1定义格式： #define 标识符 字符串 1、 不含参数： #define TAG_VIEW 10086 2、 含有参数：#define MAX_INT(a,b) a+b"><meta property="og:type" content="blog"><meta property="og:title" content="iOS 预编译指令#if"><meta property="og:url" content="https://qpc2015.github.io/2020/07/03/iOS-%E9%A2%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4-if-ifdef-elif-else-endif-import-define/"><meta property="og:site_name" content="覃鹏成的博客"><meta property="og:description" content="OC中的预编译指令有三种功能1：宏定义  2条件编译  3文件包含 1、宏定义 1-1定义格式： #define 标识符 字符串 1、 不含参数： #define TAG_VIEW 10086 2、 含有参数：#define MAX_INT(a,b) a+b"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://qpc2015.github.io/img/og_image.png"><meta property="article:published_time" content="2020-07-03T02:57:54.000Z"><meta property="article:modified_time" content="2022-07-04T03:41:15.684Z"><meta property="article:author" content="覃鹏成"><meta property="article:tag" content="iOS"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://qpc2015.github.io/2020/07/03/iOS-%E9%A2%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4-if-ifdef-elif-else-endif-import-define/"},"headline":"iOS 预编译指令#if","image":["https://qpc2015.github.io/img/og_image.png"],"datePublished":"2020-07-03T02:57:54.000Z","dateModified":"2022-07-04T03:41:15.684Z","author":{"@type":"Person","name":"覃鹏成"},"publisher":{"@type":"Organization","name":"覃鹏成的博客","logo":{"@type":"ImageObject","url":"https://qpc2015.github.io/img/logo.svg"}},"description":"OC中的预编译指令有三种功能1：宏定义  2条件编译  3文件包含 1、宏定义 1-1定义格式： #define 标识符 字符串 1、 不含参数： #define TAG_VIEW 10086 2、 含有参数：#define MAX_INT(a,b) a+b"}</script><link rel="canonical" href="https://qpc2015.github.io/2020/07/03/iOS-%E9%A2%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4-if-ifdef-elif-else-endif-import-define/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="覃鹏成的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-07-03T02:57:54.000Z" title="2020/7/3 上午10:57:54">2020-07-03</time>发表</span><span class="level-item"><time dateTime="2022-07-04T03:41:15.684Z" title="2022/7/4 上午11:41:15">2022-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/iOS/">iOS</a></span><span class="level-item">12 分钟读完 (大约1860个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">iOS 预编译指令#if</h1><div class="content"><p>OC中的预编译指令有三种功能1：宏定义  2条件编译  3文件包含</p>
+<p>1、宏定义</p>
+<p>1-1定义格式： #define 标识符 字符串</p>
+<p>1、 不含参数： #define TAG_VIEW 10086</p>
+<p>2、 含有参数：#define MAX_INT(a,b) a+b</p>
+<span id="more"></span>
+
+<p>1-2宏定义的说明</p>
+<p>1、宏名一般习惯用大写字母表示，以便与变量名相区别。但这并非规定，也可用小写字母。</p>
+<p>2、 宏定义是用宏名代替一个字符串，只作简单置换，不作正确性检查，同时也不会做运算逻辑处理,同时在进行宏定义时，可以引用已定义的宏名，可以层层置换。在这里需要特别注意的是：当宏涉运算时，要根据情况来添加括号。</p>
+<p>3、  ＃define 命令出现在程序中函数的外面，宏名的有效范围为定义命令之后到本文件结束。通常，＃define 命令写在文件开头，函数之前，作为文件一部分，在此文件范围内有效。</p>
+<p>4、 可以用＃undef  命令终止宏定义的作用域。</p>
+<p>5、宏定义是专门用于预处理命令的一个专用名词，它与定义变量的含义不同，只作字符替换，不分配内存空间。</p>
+<p>特别提示：</p>
+<p>1、省略号…和VA_ARGS的使用–关于省略号··· 代表的是个数可变的参数即可变参数，一般会与<strong>VA</strong>ARGS__结合使用，<strong>VA</strong>ARGS__表示保留名，将省略号省略的参数传递给宏。如下</p>
+<p>// 例如我们最常见的形式</p>
+<p>#ifdef DEBUG</p>
+<p>#define JRLog(…) NSLog(<strong>VA_ARGS</strong>)</p>
+<p>#else</p>
+<p>#define JRLog(…)// 如果编译经过在这里那么JRLog(···)无意义</p>
+<p>#endif</p>
+<p>2、条件编译</p>
+<p>条件编译就是在编译之前预处理器根据预处理指令判断对应的条件，如果条件满足就将对应的代码编译进去，否则代码就根本不进入编译环节（相当于根本就没有这段代码）。</p>
+<p>常用的条件编译函数：</p>
+<p>1、#if 编译预处理中的条件命令, 相当于C语法中的if语句，如果if后判断为真则执行if后面的代码块</p>
+<p>2、 #ifdef 判断某个宏是否被定义, 若已定义, 执行随后的语句-注意只会判断该宏是否定义，而不会具体判断语句的正确性</p>
+<p>3、 #ifndef 与#ifdef相反, 判断某个宏是否未被定义</p>
+<p>4、 #elif 若#if, #ifdef, #ifndef或前面的#elif条件不满足, 则执行#elif之后的语句, 相当于C语法中的else-if</p>
+<p>6、 #else 与#if, #ifdef, #ifndef对应, 若这些条件不满足, 则执行#else之后的语句, 相当于C语法中的else</p>
+<p>7、 #endif #if, #ifdef, #ifndef这些条件命令的结束标志.</p>
+<p>8、#if 与 #ifdef 的区别：#if是判断后面的条件语句是否成立，#ifdef是判断某个宏是否被定义过。要区分开！</p>
+<p>#ifdef  MAX_F</p>
+<p>// 如果定义了宏MAX_F，则编译此处的代码</p>
+<p>#else</p>
+<p>// 如果没有定义宏MAX_F，则编译此处的代码</p>
+<p>#endif</p>
+<p>// 同样</p>
+<p>#ifndef  MAX_F</p>
+<p>// 如果没有定义宏MAX_F，则编译此处的代码</p>
+<p>#elif MAX_INT</p>
+<p>// 如果定义了宏MAX_F,同时还定义了宏MAX_INT，则编译此处的代码</p>
+<p>#else</p>
+<p>// 定义了宏MAX_F,但是没有定义宏MAX_INT，则编译此处的代码</p>
+<p>#endif</p>
+<p>另外在pch文件中，可以看到自带一个条件编译</p>
+<p>#ifndef Header_h </p>
+<p>#define Header_h </p>
+<p>#endif</p>
+<p>这种格式是为了防止该头文件被引用时发生重复引用。</p>
+<p>条件编译的常用情况：</p>
+<p>1：情况1：</p>
+<p>#ifdef _XXXX</p>
+<p>…程序段1…</p>
+<p>#else</p>
+<p>…程序段2…</p>
+<p>#endif</p>
+<p>这表明如果标识符_XXXX已被#define命令定义过则对程序段1进行编译；否则对程序段2进行编译。</p>
+<p>例如： </p>
+<p>#define NUM</p>
+<p>………….</p>
+<p>………….</p>
+<p>………….</p>
+<p>#ifdef NUM</p>
+<p>printf(“之前NUM有过定义啦！:) “);</p>
+<p>#else</p>
+<p>printf(“之前NUM没有过定义！:( “);</p>
+<p>#endif</p>
+<p>}</p>
+<p>如果程序开头有#define NUM这行，即NUM有定义，碰到下面#ifdef NUM的时候，当然执行第一个printf。否则第二个printf将被执行。</p>
+<p>我认为，用这种，可以很方便的开启/关闭整个程序的某项特定功能。</p>
+<p>2:情况2： </p>
+<p>#ifndef _XXXX </p>
+<p>…程序段1… </p>
+<p>#else </p>
+<p>…程序段2… </p>
+<p>#endif</p>
+<p>这里使用了#ifndef，表示的是if not def。当然是和#ifdef相反的状况（如果没有定义了标识符_XXXX，那么执行程序段1，否则执行程序段2）。例子就不举了。</p>
+<p>3：情况3：</p>
+<p>#if 常量 </p>
+<p>…程序段1…</p>
+<p>#else</p>
+<p>…程序段2…</p>
+<p>#endif </p>
+<p>这里表示，如果常量为真（非0，随便什么数字，只要不是0），就执行程序段1，否则执行程序段2。</p>
+<p>我认为，这种方法可以将测试代码加进来。当需要开启测试的时候，只要将常量变1就好了。而不要测试的时候，只要将常量变0。</p>
+<p>iOS常用的系统参数宏：</p>
+<p>// 判断是否是真机</p>
+<p>#if TARGET_OS_IPHONE // 在这里一定不能使用#ifdef，因为TARGET_OS_IPHONE无论在真机还是模拟器情况下都存在只不过 模拟器时值为0</p>
+<p>#else</p>
+<p>#endif</p>
+<p>// 判断是否是模拟器</p>
+<p>#if TARGET_OS_SIMULATOR // 同上。”TARGET_IPHONE_SIMULATOR”已经废弃</p>
+<p>#else</p>
+<p>#endif</p>
+<p>// 判断手机系统版本</p>
+<p>#if __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= __IPHONE_9_0</p>
+<p>#else</p>
+<p>#endif</p>
+<p>// 规定只能在ios系统下运行</p>
+<p>#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED </p>
+<p>​    // 规定运行支持的最小版本</p>
+<p>​    #if __IPHONE_OS_VERSION_MIN_REQUIRED &lt; __IPHONE_7_0</p>
+<p>​    #else</p>
+<p>​    #endif</p>
+<p>#endif</p>
+<p>// 可以参照Availability.h 文件  文件路径 /Applications/Xcode8.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include 不同Xcode版本路径略有差异</p>
+<p>/**</p>
+<p> #define __IPHONE_2_0      20000</p>
+<p> #define __IPHONE_2_1      20100</p>
+<p> #define __IPHONE_2_2      20200</p>
+<p> #define __IPHONE_3_0      30000</p>
+<p> #define __IPHONE_3_1      30100</p>
+<p> #define __IPHONE_3_2      30200</p>
+<p> #define __IPHONE_4_0      40000</p>
+<p> #define __IPHONE_4_1      40100</p>
+<p> #define __IPHONE_4_2      40200</p>
+<p> #define __IPHONE_4_3      40300</p>
+<p> #define __IPHONE_5_0      50000</p>
+<p> #define __IPHONE_5_1      50100</p>
+<p> #define __IPHONE_6_0      60000</p>
+<p> #define __IPHONE_6_1      60100</p>
+<p> #define __IPHONE_7_0      70000</p>
+<p> #define __IPHONE_7_1      70100</p>
+<p> #define __IPHONE_8_0      80000</p>
+<p> #define __IPHONE_8_1      80100</p>
+<p> #define __IPHONE_8_2      80200</p>
+<p> #define __IPHONE_8_3      80300</p>
+<p> #define __IPHONE_8_4      80400</p>
+<p> #define __IPHONE_9_0      90000</p>
+<p> #define __IPHONE_9_1      90100</p>
+<p> #define __IPHONE_9_2      90200</p>
+<p> #define __IPHONE_9_3      90300</p>
+<p> #define __IPHONE_10_0    100000</p>
+<p> #define __IPHONE_10_1    100100</p>
+<p> */</p>
+<p>3、文件包含</p>
+<p>C语言下一般使用 #include, OC中一般使用 #import ,它们的区别是：在使用#include的时候要注意处理重复引用，#import大部分功能和#include是一样的,但是他处理了重复引用的问题,我们在引用文件的时候不用再去自己进行重复引用处理。OC中还有一个引用声明 @class主要是用于声明一个类,告诉编译器它后面的名字是一个类的名字,而这个类的定义实现是暂时不用知道的。一般来说,在interface中(.h文件)引用一个类,就用@class,它会把这个类作为一个类型来使用,而在实现这个interface的文件中,如果需要引用这个类的实体变量或者方法之类的,还是需要import这个在@class中声明的类。</p>
+<p>————————————————</p>
+<p>版权声明：本文为CSDN博主「yingBi2014」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yingBi2014/article/details/79664466">https://blog.csdn.net/yingBi2014/article/details/79664466</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>iOS 预编译指令#if</p><p><a href="https://qpc2015.github.io/2020/07/03/iOS-预编译指令-if-ifdef-elif-else-endif-import-define/">https://qpc2015.github.io/2020/07/03/iOS-预编译指令-if-ifdef-elif-else-endif-import-define/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>覃鹏成</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-07-03</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/iOS/">iOS</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/07/04/Xib%E5%8F%8A%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6%E5%B0%81%E8%A3%85/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Xib及自定义控件封装</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/07/02/OC%E4%B8%8EJS%E4%BA%A4%E4%BA%92/"><span class="level-item">OC与JS交互</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="SOHUCS" sid="2020/07/03/iOS-预编译指令-if-ifdef-elif-else-endif-import-define/"></div><script charset="utf-8" src="https://changyan.sohu.com/upload/changyan.js"></script><script>window.changyan.api.config({appid: 'cyw2jbP3v',conf: 'prod_84816b763e4a00b5ad4eca58f742355f'});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="鹏成的博客"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">鹏成的博客</p><p class="is-size-6 is-block">鹏成的博客</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>上海浦东</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">35</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">21</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/qpc2015" target="_blank" rel="noopener">关注我</a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="http://www.wellfruit.net" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">well</span></span><span class="level-right"><span class="level-item tag">www.wellfruit.net</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/flutter-%E7%A7%BB%E5%8A%A8%E7%AB%AF/"><span class="level-start"><span class="level-item">flutter 移动端</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/iOS/"><span class="level-start"><span class="level-item">iOS</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/swift/"><span class="level-start"><span class="level-item">swift</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/web/"><span class="level-start"><span class="level-item">web</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%85%B6%E4%BB%96/"><span class="level-start"><span class="level-item">其他</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="level-start"><span class="level-item">数据结构</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91/"><span class="level-start"><span class="level-item">物联网</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-04T03:07:39.000Z">2022-07-04</time></p><p class="title"><a href="/2022/07/04/App-Store-Connect%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E6%97%A0%E6%95%88/">App Store Connect二进制文件无效</a></p><p class="categories"><a href="/categories/iOS/">iOS</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-01T02:24:14.000Z">2022-07-01</time></p><p class="title"><a href="/2022/07/01/iOS%E7%BB%99iot%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%91/">iOS给iot设备配网</a></p><p class="categories"><a href="/categories/iOS/">iOS</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-06-24T06:41:53.000Z">2022-06-24</time></p><p class="title"><a href="/2022/06/24/iOS%E4%B8%8E%E7%A1%AC%E4%BB%B6%E6%89%93%E4%BA%A4%E9%81%93-NSMutableData-NSData-Byte%E7%9A%84%E4%BD%BF%E7%94%A8/">iOS与硬件打交道-NSMutableData NSData Byte的使用</a></p><p class="categories"><a href="/categories/iOS/">iOS</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-06-23T06:14:59.000Z">2022-06-23</time></p><p class="title"><a href="/2022/06/23/WIFI%E9%85%8D%E7%BD%91%E6%96%B9%E6%A1%88/">WIFI配网方案</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-04-22T04:16:37.000Z">2022-04-22</time></p><p class="title"><a href="/2022/04/22/Node%E7%AC%94%E8%AE%B0/">Node笔记</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">六月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">九月 2019</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AFNetworking/"><span class="tag">AFNetworking</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ES6/"><span class="tag">ES6</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NSData-Byte/"><span class="tag">NSData Byte</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crash/"><span class="tag">crash</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/flutter/"><span class="tag">flutter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo%E5%8D%9A%E5%AE%A2/"><span class="tag">hexo博客</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iOS/"><span class="tag">iOS</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iOS%E9%80%86%E5%90%91/"><span class="tag">iOS逆向</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/node/"><span class="tag">node</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/swift/"><span class="tag">swift</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vue/"><span class="tag">vue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%B2/"><span class="tag">串</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">微信小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%A0%88/"><span class="tag">栈</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%A0%91/"><span class="tag">树</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/"><span class="tag">物联网</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/"><span class="tag">线性表</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%98%9F%E5%88%97/"><span class="tag">队列</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="覃鹏成的博客" height="28"></a><p class="is-size-7"><span>&copy; 2022 覃鹏成</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,573 @@
+
+@charset "utf-8";
+*{ margin: 0; padding: 0}
+body{
+    font:menu;
+    height: 100%;
+    width: 100%;
+    background: #29415c;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+    -webkit-border-radius:0px;
+    -moz-border-radius:0px;
+    border-radius:0px;
+    background-color: #ededed;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    background-color: #b2b2b2;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: #46709a;
+}
+.monitoring-box::-webkit-scrollbar{
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/*webkit内核*/
+.scroll_content::-webkit-scrollbar {
+    width:0px;
+    height:0px;
+}
+/*.scroll_content::-webkit-scrollbar-button    {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-webkit-scrollbar-track     {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-webkit-scrollbar-track-piece {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-webkit-scrollbar-thumb{
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-webkit-scrollbar-corner {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-webkit-scrollbar-resizer  {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-webkit-scrollbar {
+    width:10px;
+    height:10px;
+}*/
+/*o内核*/
+.scroll_content .-o-scrollbar{
+    -moz-appearance: none !important;
+    background: rgba(0,255,0,0) !important;
+}
+/*.scroll_content::-o-scrollbar-button    {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-o-scrollbar-track     {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-o-scrollbar-track-piece {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-o-scrollbar-thumb{
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-o-scrollbar-corner {
+    background-color:rgba(0,0,0,0);
+}
+.scroll_content::-o-scrollbar-resizer  {
+    background-color:rgba(0,0,0,0);
+}*/
+/*IE10,IE11,IE12*/
+.scroll_content{
+    -ms-scroll-chaining: chained;
+    -ms-overflow-style: none;
+    -ms-content-zooming: zoom;
+    -ms-scroll-rails: none;
+    -ms-content-zoom-limit-min: 100%;
+    -ms-content-zoom-limit-max: 500%;
+    -ms-scroll-snap-type: proximity;
+    -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style: none;
+    overflow: auto;
+}
+
+
+
+
+
+
+.pw-center{
+    margin-top: 65px;
+}
+
+/*最外层使用的样式 高度在js中设置*/
+.right-content{
+    position: relative;
+    margin: 0 7px 0 7px;
+    background: #fff;
+    overflow-y: scroll;
+    border: 1px solid #b1b1b1;
+}
+.innerLine{/*里层带有边框的样式 实时数据等等页面*/
+    margin: 0 7px 7px 15.5%;
+}
+/*padding共同样式*/
+.padding-container{
+    border: 1px solid #b1b1b1;
+    /*margin: 6px 6px 0 6px;*/
+    margin: 6px;
+    overflow-y: auto;
+}
+.main-content-inner{ /*实时数据各设备详情页面  就是可以选择十五天有很多图表的那些页面*/
+    background: #fff;
+    height: 100%;
+    overflow-y: scroll;
+    position: relative;
+}
+.homePage-padding{  /*针对首页的外层padding大小*/
+    padding: 9px;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸   火狐下的设置引入了插件nicescroll插件 在common_new.js*/
+.right-content::-webkit-scrollbar,.tab-box::-webkit-scrollbar,.noticeAddPic .upImageContainer::-webkit-scrollbar,.closeOrOpenList::-webkit-scrollbar,.choose-year::-webkit-scrollbar,.aside::-webkit-scrollbar,.padding-container::-webkit-scrollbar,.list_lh::-webkit-scrollbar,.rs-report-area-left::-webkit-scrollbar,.weiHuContent::-webkit-scrollbar,.exhibition-num-box,::-webkit-scrollbar
+.tbody-scroll::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+
+
+
+
+
+#rightArrow{
+    /*width: 18px;
+    height: 560px;
+    position: fixed;
+    left: 13%;
+    z-index: 999;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: url(../images/arrow.png) no-repeat 0px 0px;
+    filter:alpha(opacity=1);
+    -moz-opacity:1;
+    opacity:1;
+    display: none;*/
+
+    width: 7px;
+    height: 57px;
+    position: fixed;
+    left: 14.9%;
+    z-index: 999;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: url(../images/arrow.png) no-repeat 0px 0px;
+    filter: alpha(opacity=50);
+    -moz-opacity: 1;
+    opacity: 1;
+    /*display: none;*/
+
+}
+#rightArrow:hover{
+    /*filter:alpha(opacity=1);
+    -moz-opacity:1;
+    opacity:1;*/
+    cursor: pointer;
+}
+#rightArrow a {
+    display: block;
+    height: 45px;
+}
+.tck-head {
+    width: 600px;
+    overflow: hidden;
+    position: fixed;
+    z-index: 7;
+}
+.tck-head ul li {
+    height: 45px;
+    line-height: 45px;
+    background: #baddf0;
+    font-size: 14px;
+    padding-left: 20px;
+    overflow: hidden;
+    color: #000;
+}
+.tck-head ul li a {
+    float: right;
+    padding-right: 15px;
+    cursor: pointer;
+}
+.tck_nei {  height: auto;  padding: 0px 0 30px 0; margin-top: 65px; height:430px;  overflow-y: auto; }
+.tck_nei>p{ margin:10px 0px 0px 40px!important; overflow: hidden;}
+/*.tck_show {
+    line-height: 38px;
+    font-size: 14px;
+    color: #000;
+    width: 100%;
+    border-bottom: 1px solid #ededed;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    font-weight: bold;
+}*/
+.tck_all {
+    width: 600px;
+    height: 500px;
+    border-radius: 5px;
+    /*position: fixed;
+    z-index: 1050;*/
+    top:50%;
+    left:50%;
+    margin-top:-250px;
+    margin-left:-300px;
+    background: #fff;
+    display: none;
+}
+.tck_ji {  border-top-left-radius: 5px;  border-top-right-radius: 5px;  }
+.tck_bao_button {  float: right;  margin: 3px 40px 0px 0px;  }
+.tck_bao_del {  float: left;  margin: 3px 0px 0px 10px;  }
+.form-horizontal .form-group {
+    margin-right: 0px;
+    margin-left: 0px;
+    line-height: 34px;
+}
+
+/*批量导入*/
+.form-center{ margin-top: 7px;}
+.qr-width{ margin:10px 0 0px 42px}
+.file {
+    display: inline-block;
+    text-align: center;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    color: #1E88C7;
+    line-height: 20px;
+    width: 100px;
+    position: relative;
+}
+.file input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 30px;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+
+}
+.qr-two-btn{ margin: 0 auto;  width:155px;  }
+.qr-two-btn a:nth-of-type(2){ margin-left: 30px}
+
+.noPicter{ line-height: 24px;}
+
+
+/*新的统一弹出框 161220 start*/
+.noticeDeleteYesNo, .noticeDeleteYesNo1{
+    display: none;
+    position: fixed;
+    left: 50%;
+    top:50%;
+    width: 442px;
+    height:172px;
+    z-index: 1007;
+    margin-left:-221px;
+    margin-top:-86px;
+    background: #fff;
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    -o-border-radius: 3px 3px 0 0;
+}
+.deleteTip{
+    position: relative;
+    background-image: url("../images/deleteTip_bg.png");
+    height: 43px;
+    width: 100%;
+    padding-left: 72px;
+    line-height: 43px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    -o-border-radius: 3px 3px 0 0;
+}
+.deleteTipIcon{
+    position: absolute;
+    left: 8px;
+    top:-6px;
+}
+.deleteTipClose,.noticeClose{
+    position: absolute;
+    right: 18px;
+    cursor: pointer;
+}
+.noticeClose{
+    right: 25px;
+    top:-1px;
+}
+.deleteCon{
+    border: 1px solid #797979;
+    border-top: none;
+    padding: 10px 12px 0 12px;
+    min-height: 130px;
+}
+.deleteFont{
+    display: inline-block;
+    font-size: 16px;
+    text-align: left;
+    color: #677b83;
+    border: 1px solid #e4e2e2;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    background: #f8f6f6;
+    height: 57px;
+    min-width: 411px;
+    padding: 13px 9px 0 9px;
+}
+.yesNo{
+    margin: 15px 6px 0 0;
+    float: right;
+}
+.yesNo label{
+    width: 86px;
+    height: 30px;
+    line-height: 30px;
+    background: url("../images/pop_btn.png") no-repeat;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 18px;
+}
+.yesNo label:hover{
+    background: url("../images/pop_btn_hover.png") no-repeat;
+}
+.yesNo label:active{
+    box-shadow: 0 0 20px #3bbeff;
+}
+/*新的统一弹出框 161220 end*/
+
+
+
+.beforeStyle{
+    margin:10px 0px 0px 0px;
+    padding:0 10px 0 20px;
+}
+.beforeStyle1{
+    margin:10px 0px 0px 0px;
+    padding:0 10px 0 0px;
+}
+
+.inportColor{
+    color: #337ab7;
+}
+.updateAndInsert{
+	margin: 13px 0 5px 42px;
+}
+.updateAndInsert input{
+	width: 16px;
+	height: 16px;
+	line-height: 26px;
+	text-align: center;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	-mz-border-radius: 3px;
+	vertical-align:sub;
+	margin-right: 3px;
+}
+.updateAndInsert input:last-child{
+	margin-left: 10px;
+}
+.main_personal_maintain_add{
+    padding: 3% 0 0 1%;
+    text-align: center;
+    height: 530px;
+    text-align: center;
+    padding: 0px;
+}
+
+.lh{
+    width: 100%;
+    height: 32px;
+    font-size: 12px;
+    line-height: 32px;
+    border-bottom: 1px solid #b1b1b1;
+}
+.navTab{
+    width: 45%;
+    height: 32px;
+    color: #17203c;
+    float: left;
+}
+
+.navTab-box-wrap::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+.navTab-box-wrap{
+    width: 100%;
+    height: 100%;/*
+    overflow-x: auto;
+    overflow-y: hidden;*/
+    overflow: hidden;
+}
+.navTab-box{
+    width: 100%;
+    height: 100%;
+}
+/*实时数据面包屑导航的导航条的宽度  本来是475px 硬性设置*/
+.nicescroll-cursors{
+    width: 100% !important;
+}
+.navTab li{
+    line-height: 32px;
+    float: left;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    padding: 0 16px 0 18px;
+    background: url("/media/images/arrowRight.png") no-repeat right center;
+    max-width: 190px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.go-back{
+    float: right;
+    margin-right:20px;
+    background: url("/media/images/go-back.png") no-repeat center;
+    width: 12px;
+    height: 32px;
+}
+.go-back:hover{
+    background: url("/media/images/go-back-hover.png") no-repeat center;
+}
+
+/*隐患曝光 翻页style*/
+
+.zj_page,.paging{
+    line-height: 30px;
+    position: relative;
+    left: 30px;
+    bottom: 10px;
+    font-size: 12px;
+}
+.zj_page b{
+    font-weight:normal;
+    margin: 0 5px;
+}
+.prev{
+    border: 1px solid #adadad;
+    border-radius: 5px;
+    padding: 6px 7px;
+    cursor: pointer;
+    background: #eee;
+}
+.zj_page btn.active{
+    background: #71ade4;
+    color: #0162bb;
+}
+.jump{
+    width: 67px;
+    background: #dfe3e6;
+    text-align: center;
+    cursor: inherit;
+    margin: 0 12px;
+    height: 30px;
+}
+.goBtn{
+    display: inline-block;
+    border: 1px solid #adadad;
+    border-radius: 3px;
+    padding: 0 8px;
+    height: 32px;
+    line-height: 32px;
+    position: relative;
+}
+.noChoice{
+    color: #b9bcbf;
+    cursor: no-drop;
+}
+.goBtn.noChoice{
+    background: #eee;
+}
+
+/*报警信息数据*/
+.paging label.hint{
+    font-size: 12px;
+    color: #8d8d8d;
+    padding: 10px 12px;
+}
+.paging .pageNum{
+    vertical-align: 0px !important;
+    background: #dfe3e6;
+    border: 1px solid #adadad;
+    border-radius: 3px;
+    padding: 0 10px;
+    height: 32px;
+}
+.paging .pageNum:hover{ background:#cfd0d1; }
+.paging .pageNum.normal:hover{ background:#dfe3e6; }
+.num-caret{ margin-left: 15px;  }
+.paging .pageNumList>li>a{
+    line-height: 5px;
+    color: #000;
+}
+.paging>span{
+    margin: 0 5px !important;
+}
+.paging>span>a,.pageNum>a{
+    color: #000;
+}
+.paging span input{
+    background: #dfe3e6;
+}
+.paging .goPage{width: 45px; text-align: center}
+.paging .noChoice{ color: #b9bcbf;cursor: no-drop;}
+.paging .noChoice:hover{ color: #b9bcbf;background: #dfe3e6;cursor: no-drop;}
+
+.specific_help_tip{
+    position: absolute;
+    width:auto;
+    display: inline-block;
+    height:35px;
+    line-height: 31px;
+    padding: 0px 10px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    color: #8d8d8d;
+    background: #faffbd;
+    border: 2px solid #d0d0d0;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+

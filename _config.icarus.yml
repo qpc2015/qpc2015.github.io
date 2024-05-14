@@ -227,9 +227,9 @@ widgets:
         position: left
         type: profile
         # Author name
-        author: 鹏成的博客
+        author: 布谷博客
         # Author title
-        author_title: 鹏成的博客
+        author_title: 布谷博客
         # Author's current location
         location: 上海浦东
         # URL or path to the avatar image

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>app启动优化 - 布谷的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="布谷的博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="布谷的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="启动分类: 1.冷启动: 从用户点击App图标开始到appDelegate didFinishLaunching方法执行完成为止。这是一次完整的启动过程。 2.热启动:App 在冷启动后用户将 App 退后台，在 App 的进程还在系统里的情况下，用户重新启动进入 App 的过程，这个过程做的事情非常少。 启动主要步骤:  T1：main()函数之前，即操作系统加载App可执行文件到内存，然后执行"><meta property="og:type" content="blog"><meta property="og:title" content="app启动优化"><meta property="og:url" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/"><meta property="og:site_name" content="布谷的博客"><meta property="og:description" content="启动分类: 1.冷启动: 从用户点击App图标开始到appDelegate didFinishLaunching方法执行完成为止。这是一次完整的启动过程。 2.热启动:App 在冷启动后用户将 App 退后台，在 App 的进程还在系统里的情况下，用户重新启动进入 App 的过程，这个过程做的事情非常少。 启动主要步骤:  T1：main()函数之前，即操作系统加载App可执行文件到内存，然后执行"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082471.png"><meta property="og:image" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082464.png"><meta property="og:image" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082564.png"><meta property="og:image" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/16081120825645.png"><meta property="og:image" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112141845711e7bb3.png"><meta property="og:image" content="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112183223b92112f4.png"><meta property="article:published_time" content="2021-03-24T07:06:37.000Z"><meta property="article:modified_time" content="2021-06-24T07:11:04.734Z"><meta property="article:author" content="布谷"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082471.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/"},"headline":"app启动优化","image":["https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082471.png","https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082464.png","https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082564.png","https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/16081120825645.png","https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112141845711e7bb3.png","https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112183223b92112f4.png"],"datePublished":"2021-03-24T07:06:37.000Z","dateModified":"2021-06-24T07:11:04.734Z","author":{"@type":"Person","name":"布谷"},"publisher":{"@type":"Organization","name":"布谷的博客","logo":{"@type":"ImageObject","url":"https://qpc2015.github.io/img/logo.svg"}},"description":"启动分类: 1.冷启动: 从用户点击App图标开始到appDelegate didFinishLaunching方法执行完成为止。这是一次完整的启动过程。 2.热启动:App 在冷启动后用户将 App 退后台，在 App 的进程还在系统里的情况下，用户重新启动进入 App 的过程，这个过程做的事情非常少。 启动主要步骤:  T1：main()函数之前，即操作系统加载App可执行文件到内存，然后执行"}</script><link rel="canonical" href="https://qpc2015.github.io/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="布谷的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-24T07:06:37.000Z" title="2021/3/24 15:06:37">2021-03-24</time>发表</span><span class="level-item"><time dateTime="2021-06-24T07:11:04.734Z" title="2021/6/24 15:11:04">2021-06-24</time>更新</span><span class="level-item">7 分钟读完 (大约1110个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">app启动优化</h1><div class="content"><p><strong>启动分类:</strong></p>
+<p>1.冷启动: 从用户点击App图标开始到appDelegate didFinishLaunching方法执行完成为止。这是一次完整的启动过程。</p>
+<p>2.热启动:App 在冷启动后用户将 App 退后台，在 App 的进程还在系统里的情况下，用户重新启动进入 App 的过程，这个过程做的事情非常少。</p>
+<p><strong>启动主要步骤:</strong></p>
+<ul>
+<li><p>T1：main()函数之前，即操作系统加载App可执行文件到内存，然后执行一系列的加载&amp;链接等工作，最后执行至App的main()函数。</p>
+</li>
+<li><p>T2：main()函数之后，即从main()开始，到appDelegate的didFinishLaunchingWithOptions方法执行完毕。<br><img src="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082471.png" alt="image"></p>
+</li>
+<li><p>T3:当didFinishLaunchingWithOptions执行完成时，用户还没有看到App的主界面，也不能开始使用App。这个阶段会一般会首页渲染和数据请求后，用户才能真正看到主页面。</p>
+<span id="more"></span>
+
+</li>
+</ul>
+<p><strong>T1阶段及优化</strong></p>
+<p><img src="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082464.png" alt="image"></p>
+<table>
+<thead>
+<tr>
+<th align="left">阶段</th>
+<th align="left">工作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">加载动态库</td>
+<td align="left">Dyld从主执行文件的header获取到需要加载的所依赖动态库列表，然后它需要找到每个 dylib，而应用所依赖的 dylib 文件可能会再依赖其他 dylib，所以所需要加载的是动态库列表一个递归依赖的集合</td>
+</tr>
+<tr>
+<td align="left">Rebase和Bind</td>
+<td align="left">- Rebase在Image内部调整指针的指向。在过去，会把动态库加载到指定地址，所有指针和数据对于代码都是对的，而现在地址空间布局是随机化，所以需要在原来的地址根据随机的偏移量做一下修正 - Bind是把指针正确地指向Image外部的内容。这些指向外部的指针被符号(symbol)名称绑定，dyld需要去符号表里查找，找到symbol对应的实现</td>
+</tr>
+<tr>
+<td align="left">Objc setup</td>
+<td align="left">- 注册Objc类 (class registration) - 把category的定义插入方法列表 (category registration) - 保证每一个selector唯一 (selector uniquing)</td>
+</tr>
+<tr>
+<td align="left">Initializers</td>
+<td align="left">- Objc的+load()函数 - C的构造函数属性函数 - 非基本类型的C静态全局变量的创建(通常是类或结构体)</td>
+</tr>
+</tbody></table>
+<p><strong>优化：</strong></p>
+<p>1.减少动态库加载。每个库本身都有依赖关系，苹果公司建议使用更少的动态库，并且建议在使用动态库的数量较多时，尽量将多个动态库进行合并。数量上，苹果公司建议最多使用 6 个非系统动态库。</p>
+<p>2.减少无用类和方法，代码瘦身</p>
+<p>3.+load() 方法里的内容可以放到首屏渲染完成后再执行，或使用 +initialize() 方法替换掉。</p>
+<p>4.控制 C++ 全局变量的数量</p>
+<p><strong>T2阶段及优化</strong></p>
+<p>这个阶段在我看来主要是didFinishLaunchingWithOptions里面代码的执行：</p>
+<p><img src="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112082564.png" alt="image"></p>
+<p><strong>优化：</strong></p>
+<p>分阶段启动，首先就是把启动流程合理地划分为若干个启动阶段，然后依据每个启动项所做的事情的优先级把它们分配到相应的启动阶段，优先级高的放在靠前的阶段，优先级低的放在靠后的阶段</p>
+<p><img src="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/16081120825645.png" alt="image"></p>
+<p><strong>T3阶段及优化</strong></p>
+<p>主界面的构建</p>
+<p><strong>优化：</strong></p>
+<p>1.优化耗时操作：这个就要分析代码中是否存在图片I/O、图片解码、archive文档等隐含着一些耗时操作；</p>
+<p>2.优化串行操作。</p>
+<p><strong>启动速度监控工具</strong></p>
+<p>1.查看T1阶段时间</p>
+<ul>
+<li>通过添加环境变量可以打印出APP的T1启动时间分析（Product-&gt;Scheme-&gt;Edit Scheme-&gt;Run-&gt;Arguments-&gt;Environment Variables-）<br>DYLD_PRINT_STATISTICS设置为1；</li>
+<li>如果需要更详细的信息，那就将DYLD_PRINT_STATISTICS_DETAILS设置为1。</li>
+</ul>
+<p><img src="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112141845711e7bb3.png" alt="image-20201216113608535.png"></p>
+<p><img src="/2021/03/24/app%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96/1608112183223b92112f4.png" alt="image-20201216113648972.png"></p>
+<p>2.查看T1之后耗时</p>
+<p>方案一:定时抓取主线程方法的调用堆栈，计算一段时间里的方法耗时。（Xcode中的Time Profiler就是使用的这种的方法）</p>
+<p>方案二:对objc_msgSend方法进行hook，来得到所有方法的耗时。</p>
+<p>方案二工具实现<a target="_blank" rel="noopener" href="https://github.com/QiShare/Qi_ObjcMsgHook">https://github.com/QiShare/Qi_ObjcMsgHook</a></p>
+<p>参考文章:</p>
+<p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/12/06/waimai-ios-optimizing-startup.html">https://tech.meituan.com/2018/12/06/waimai-ios-optimizing-startup.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/85331">https://time.geekbang.org/column/article/85331</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>app启动优化</p><p><a href="https://qpc2015.github.io/2021/03/24/app启动优化/">https://qpc2015.github.io/2021/03/24/app启动优化/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>布谷</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-03-24</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-06-24</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/05/26/iOS%E8%93%9D%E7%89%99%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">iOS蓝牙知识整理</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/01/22/iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"><span class="level-item">iOS性能优化</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="SOHUCS" sid="2021/03/24/app启动优化/"></div><script charset="utf-8" src="https://changyan.sohu.com/upload/changyan.js"></script><script>window.changyan.api.config({appid: 'cyw2jbP3v',conf: 'prod_84816b763e4a00b5ad4eca58f742355f'});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="布谷博客"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">布谷博客</p><p class="is-size-6 is-block">布谷博客</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>上海浦东</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">36</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">22</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/qpc2015" target="_blank" rel="noopener">关注我</a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://juejin.cn/user/852876752599224" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">juejin</span></span><span class="level-right"><span class="level-item tag">juejin.cn</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/flutter-%E7%A7%BB%E5%8A%A8%E7%AB%AF/"><span class="level-start"><span class="level-item">flutter 移动端</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/iOS/"><span class="level-start"><span class="level-item">iOS</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/swift/"><span class="level-start"><span class="level-item">swift</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/web/"><span class="level-start"><span class="level-item">web</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%85%B6%E4%BB%96/"><span class="level-start"><span class="level-item">其他</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="level-start"><span class="level-item">数据结构</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91/"><span class="level-start"><span class="level-item">物联网</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-11-07T07:33:09.000Z">2024-11-07</time></p><p class="title"><a href="/2024/11/07/%E8%80%81%E5%AE%9E%E4%BA%BA%E5%90%AF%E8%92%99-%E7%AC%94%E8%AE%B0/">&lt;&lt;老实人启蒙&gt;&gt;笔记</a></p><p class="categories"><a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-22T03:46:08.000Z">2023-03-22</time></p><p class="title"><a href="/2023/03/22/web%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2-jenkins/">web自动打包部署-jenkins</a></p><p class="categories"><a href="/categories/web/">web</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-04T03:07:39.000Z">2022-07-04</time></p><p class="title"><a href="/2022/07/04/App-Store-Connect%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E6%97%A0%E6%95%88/">App Store Connect二进制文件无效</a></p><p class="categories"><a href="/categories/iOS/">iOS</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-01T02:24:14.000Z">2022-07-01</time></p><p class="title"><a href="/2022/07/01/iOS%E7%BB%99iot%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%91/">iOS给iot设备配网</a></p><p class="categories"><a href="/categories/iOS/">iOS</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-06-24T06:41:53.000Z">2022-06-24</time></p><p class="title"><a href="/2022/06/24/iOS%E4%B8%8E%E7%A1%AC%E4%BB%B6%E6%89%93%E4%BA%A4%E9%81%93-NSMutableData-NSData-Byte%E7%9A%84%E4%BD%BF%E7%94%A8/">iOS与硬件打交道-NSMutableData NSData Byte的使用</a></p><p class="categories"><a href="/categories/iOS/">iOS</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/03/"><span class="level-start"><span class="level-item">三月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">六月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">九月 2019</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AFNetworking/"><span class="tag">AFNetworking</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ES6/"><span class="tag">ES6</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NSData-Byte/"><span class="tag">NSData Byte</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crash/"><span class="tag">crash</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/flutter/"><span class="tag">flutter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo%E5%8D%9A%E5%AE%A2/"><span class="tag">hexo博客</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iOS/"><span class="tag">iOS</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iOS%E9%80%86%E5%90%91/"><span class="tag">iOS逆向</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/jenkins/"><span class="tag">jenkins</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/node/"><span class="tag">node</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/swift/"><span class="tag">swift</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vue/"><span class="tag">vue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%B2/"><span class="tag">串</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">微信小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%A0%88/"><span class="tag">栈</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%A0%91/"><span class="tag">树</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/"><span class="tag">物联网</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/"><span class="tag">线性表</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%98%9F%E5%88%97/"><span class="tag">队列</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="布谷的博客" height="28"></a><p class="is-size-7"><span>&copy; 2024 布谷</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
